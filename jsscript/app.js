@@ -1,6 +1,6 @@
 /**
  * Todo list: 1.win screen - hide game screen tags -show end game screen tags
- *            2. 
+ *            2.
  */
 let prompt = "easy"
 let playerStatDisplay=document.querySelector(".playerStats")
@@ -44,17 +44,25 @@ class Player extends Ship{
         console.log(this.hitPoints)
     }
 }
+function hideGame(){
+    gameContainer.style.display="none";
 
+}
 class Game{
     static difEnemies=[6,7,8]
     checkIfWin(){
-        if(this.player.hitPoints<0)
-        console.log("you lose")
+        if(this.player.hitPoints<0){
+            document.getElementById("endGameMessage").innerHTML="you lose"
+            hideGame()
+        }
         else if(this.enemy.length<=0){
-            document.getElementById()"you win")
+            document.getElementById("endGameMessage").innerHTML="you win"
+            hideGame()
         }
         else if(this.enemy[this.enemy.length-1].hitPoints<0){
+        this.player.hitPoints= this.player.hitPoints+1
         this.enemy.pop()
+        
         console.log("nextEnemy")
         }
         else{console.log("continue battle")}
@@ -79,22 +87,22 @@ class Game{
         else console.log("enemy miss")
     }
     round(enemyFighting){
-        this.checkIfWin()
+        //this.checkIfWin()
         //console.log(`Player luck is ${playerLuck} php=${this.player.hitPoints} ehp=${enemyFighting.hitPoints}`)
         let playerLuck = Math.random();
         let enemyLuck = Math.random();
-        console.log(`Player luck is ${playerLuck} php=${this.player.hitPoints} ehp=${this.enemy[this.enemy.length-1].hitPoints}`)
-        if(playerLuck>0.3){
+        //console.log(`Player luck is ${playerLuck} php=${this.player.hitPoints} ehp=${this.enemy[this.enemy.length-1].hitPoints}`)
+        if(playerLuck>0.3&&this.enemy.length>0){
             console.log(  this.enemy)
             console.log()
             enemyStatDisplay.innerHTML=` Hull : ${this.enemy[this.enemy.length-1].hitPoints} <br> FirePower : ${this.enemy[this.enemy.length-1].firePower} <br> Accuracy : ${this.enemy[this.enemy.length-1].accuracy} <br>`
             this.enemy[this.enemy.length-1].hit(this.player.firePower)
             this.enemyHit(this.player,this.enemy[this.enemy.length-1].firePower)
             }
-            else {
-                console.log("Player miss hit")
-                this.enemyHit(this.player,this.enemy[this.enemy.length-1].firePower)
-                playerStatDisplay.innerHTML =` Hull : ${this.player.hitPoints} <br> FirePower : ${this.player.firePower} <br> Accuracy : ${this.player.accuracy} <br>`
+        else if(this.enemy.length>0){
+            console.log("Player miss hit")
+            this.enemyHit(this.player,this.enemy[this.enemy.length-1].firePower)
+            playerStatDisplay.innerHTML =` Hull : ${this.player.hitPoints} <br> FirePower : ${this.player.firePower} <br> Accuracy : ${this.player.accuracy} <br>`
         }
         this.checkIfWin()
     }
