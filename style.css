@@ -1,5 +1,5 @@
 .bodyContainer{
-    display: flex;
+    display: none;
    
     justify-content: space-between;
     height: 100vh;
@@ -29,7 +29,27 @@ align-items: center;
 .right{
     
 }
-
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#startMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    background-color: black;
+    color:white;
+}
+#endGameScreen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+    color:white;
+}
 .nameBox{
     border: 1px solid black;
     width: 25vw;

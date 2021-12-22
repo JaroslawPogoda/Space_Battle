@@ -11,6 +11,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body id="game">
+    <div id="startMenu">
+        <h1>Choose difficulty level</h1>
+        <button onClick= "createGame('easy')">Easy</button>
+        <button onClick= "createGame('Medium')">Medium</button>
+        <button onClick= "createGame('Hard')">Hard</button>
+        
+    </div>
     <div class="bodyContainer">
 
         <div class="mainCharacterView left" >
@@ -23,8 +30,10 @@
                 </div>
 
         </div>
-
-        <button id = "attack" onclick="newGame.round(newGame.enemy[newGame.enemyIterator])">attack</button>
+        <div class=buttons>
+        <button id = "attack" onclick="newGame.round(newGame.enemy[newGame.enemyIterator])">Attack</button>
+        <button id = "retreat" onclick="hideGame('Game Over\n You retreat to safety')">Retreat</button>
+        </div>
         <div class="mainCharacterView right">
            
             <div class="nameBox">Enemy</div>

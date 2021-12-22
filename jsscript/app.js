@@ -1,12 +1,22 @@
 /**
- * Todo list: 1.win screen - hide game screen tags -show end game screen tags
- *            2.
+ * Todo list: Completed 1.win screen - hide game screen tags -show end game screen tags
+ *            Completed 2. create retreat button html
+ *            completed 3. create Retreat screen
+ *            partialy completed 4. Create choose your difficulty level
+ *            completed 5. use accuracy to determine luck of hit
+ *             6. balancing the game
  */
 let prompt = "easy"
 let playerStatDisplay=document.querySelector(".playerStats")
 let enemyStatDisplay=document.querySelector(".enemyStats")
 let endGameMessage =document.getElementById("endGameScreen")
 let gameContainer = document.querySelector(".bodyContainer") 
+let newGame=""
+let startMenuElements= document.querySelector("#startMenu")
+function revealGameElements(){
+    startMenuElements.style.display="none"
+    gameContainer.style.display="flex"
+}
 class Ship{
     hitPoints=0;
     firePower =0
@@ -36,51 +46,46 @@ class Player extends Ship{
     constructor(hp,firePower,accuracy){
         super(hp,firePower,accuracy)
         playerStatDisplay.innerHTML =` Hull : ${hp} <br> FirePower : ${firePower} <br> Accuracy : ${accuracy} <br>`
-        
-        
     }
     hit(firePower){
         this.hitPoints-=firePower;
         console.log(this.hitPoints)
     }
 }
-function hideGame(){
+function hideGame(message){
+    document.getElementById("endGameMessage").innerHTML=message
     gameContainer.style.display="none";
 
 }
+function createGame(difficulty){}
 class Game{
     static difEnemies=[6,7,8]
     checkIfWin(){
         if(this.player.hitPoints<0){
-            document.getElementById("endGameMessage").innerHTML="you lose"
-            hideGame()
+            hideGame("Game Over\nYou Lose")
         }
         else if(this.enemy.length<=0){
-            document.getElementById("endGameMessage").innerHTML="you win"
-            hideGame()
+            hideGame("Congratz\n You are the winner")
         }
         else if(this.enemy[this.enemy.length-1].hitPoints<0){
         this.player.hitPoints= this.player.hitPoints+1
         this.enemy.pop()
-        
         console.log("nextEnemy")
         }
         else{console.log("continue battle")}
     }
-    createPlayer(){
-        this.player = new Player(15,3,0.3)
+    createPlayer(hp,fp,acc){
+        this.player = new Player(hp,fp,acc)
     }
     createEnemy(){
         let randNumHP = Math.floor(Math.random()*10+1)
         let randNumFP = Math.floor(Math.random()*4)
         let randNumACC = Math.random()
         this.enemy.push(new Enemy(randNumHP,randNumFP,randNumACC))
-
-
     }
     enemyHit(player,enemyfirePower){
         let enemyLuck = Math.random();
-        if (enemyLuck>0.5){
+        if (enemyLuck<this.enemy[this.enemy.length-1].accuracy){
             player.hit(enemyfirePower)
             console.log("enemy hit")
         }
@@ -92,7 +97,7 @@ class Game{
         let playerLuck = Math.random();
         let enemyLuck = Math.random();
         //console.log(`Player luck is ${playerLuck} php=${this.player.hitPoints} ehp=${this.enemy[this.enemy.length-1].hitPoints}`)
-        if(playerLuck>0.3&&this.enemy.length>0){
+        if(playerLuck<this.player.accuracy&&this.enemy.length>0){
             console.log(  this.enemy)
             console.log()
             enemyStatDisplay.innerHTML=` Hull : ${this.enemy[this.enemy.length-1].hitPoints} <br> FirePower : ${this.enemy[this.enemy.length-1].firePower} <br> Accuracy : ${this.enemy[this.enemy.length-1].accuracy} <br>`
@@ -110,7 +115,19 @@ class Game{
         this.difficulty=difficulty  
         this.enemy=[]    
         if(this.difficulty.toLowerCase()=="easy"){
-            this.createPlayer();
+            this.createPlayer(20,5,0.6);
+            for(let iterator = 0 ; iterator < 6; iterator++){
+                this.createEnemy();
+            }
+        }
+        else if(this.difficulty.toLowerCase()=="medium"){
+            this.createPlayer(15,4,0.5);
+            for(let iterator = 0 ; iterator < 6; iterator++){
+                this.createEnemy();
+            }
+        }
+        else if(this.difficulty.toLowerCase()=="hard"){
+            this.createPlayer(10,3,0.4);
             for(let iterator = 0 ; iterator < 6; iterator++){
                 this.createEnemy();
             }
@@ -121,9 +138,8 @@ class Game{
     }
     
 }
+function createGame(difficulty){revealGameElements();console.log("new GAme ");newGame = new Game(difficulty);}
 
-let difficulty = prompt;
-let newGame = new Game(difficulty);
 //console.log(newGame)
-console.log(newGame.player)
+//console.log(newGame.player)
 //console.log(newGame.enemy)
