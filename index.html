@@ -12,17 +12,18 @@
 </head>
 <body id="game">
     <div id="startMenu">
-        <h1>Choose difficulty level</h1>
-        <button onClick= "createGame('easy')">Easy</button>
-        <button onClick= "createGame('Medium')">Medium</button>
-        <button onClick= "createGame('Hard')">Hard</button>
-        
+        <h1>Choose difficulty level<br></h1>
+        <div>
+            <button onClick= "createGame('easy')">Easy</button>
+            <button onClick= "createGame('Medium')">Medium</button>
+            <button onClick= "createGame('Hard')">Hard</button>
+        </div>
     </div>
     <div class="bodyContainer">
-
+        
         <div class="mainCharacterView left" >
                 <div class="nameBox">USS Schwarzenegger</div>
-                <div class="playerImage"></div>
+                <div class="playerImage"><div id="laser"></div></div>
                 <div class="playerStats">
                 Hull : 15 <br>
                 FirePower : 5 <br>
@@ -31,7 +32,7 @@
 
         </div>
         <div class=buttons>
-        <button id = "attack" onclick="newGame.round(newGame.enemy[newGame.enemyIterator])">Attack</button>
+        <button id = "attack" onclick="newGame.round()">Attack</button>
         <button id = "retreat" onclick="hideGame('Game Over\n You retreat to safety')">Retreat</button>
         </div>
         <div class="mainCharacterView right">
@@ -50,6 +51,7 @@
         </div>
         <div id="endGameScreen" display="none">
             <h1 id='endGameMessage'></h1>
+            <br>
             <button onclick="location.reload();">Restart Game <br>Refresh Page</button>
         </div>
 

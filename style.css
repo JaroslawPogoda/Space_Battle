@@ -36,6 +36,8 @@ align-items: center;
 }
 #startMenu{
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     height:100vh;
@@ -44,11 +46,13 @@ align-items: center;
 }
 #endGameScreen{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: black;
     color:white;
+    flex-wrap: wrap;
 }
 .nameBox{
     border: 1px solid black;
@@ -67,12 +71,13 @@ align-items: center;
     width: 30vw;
     height: 40vh;
     background-image: url("images/space_hero.gif");
-    background-size: cover ;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0px 0px 20px 10px white;
-    
-
+    /* animation-name:player;
+    animation-duration: 4s;
+    animation-iteration-count:infinite; */
     
 }
 .playerStats{
@@ -86,9 +91,46 @@ align-items: center;
     font-size: 1.3em;
     box-shadow: 0px 0px 20px 10px white;
     border-radius: 2%;
-
-
+    
 }
+@keyframes laser {
+    0%{
+        width: 200px;
+    }
+    75%{
+
+    }
+    100%{
+        width:700px;
+        float:top;
+        transform: rotate(-90deg);
+    }  
+}
+@keyframes player {
+    0%{
+
+    }
+    75%{
+        transform: rotate(90deg);
+    }
+    100%{
+
+    }
+}
+#laser{
+    display:none;
+    position: absolute;
+    background-image: url("images/ZF6U.gif");
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 100%;
+    animation-name: laser;
+    animation-duration: 6s;
+    object-fit: cover;
+    /* transform-origin: center top; */
+    /* animation-iteration-count:infinite; */
+}
+
 .enemyImage{
     border: 1px solidblack;
     width: 30vw;
